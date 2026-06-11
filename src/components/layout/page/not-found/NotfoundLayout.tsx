@@ -2,8 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
-import { LineShadowText } from "@/components/ui/line-shadow-text";
+import { InteractiveHoverButton } from "@/src/components/ui/interactive-hover-button";
 
 export default function NotfoundLayout() {
   const router = useRouter();
@@ -79,9 +78,7 @@ export default function NotfoundLayout() {
         </div>
 
         <h2 className="mt-0 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-[#0f4f9a] ">
-        <LineShadowText className="text-[#0f4f9a]">
           OOOps...!
-          </LineShadowText>
         </h2>
 
         <p className="mt-3 mx-auto max-w-145 text-xs sm:text-sm md:text-base text-[#0f4f9a]/80">
