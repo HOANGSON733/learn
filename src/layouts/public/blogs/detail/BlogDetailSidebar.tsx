@@ -3,6 +3,7 @@ import { Bookmark, FileText, MessageCircle, Share2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/src/components/ui/card";
 
 import { relatedPosts } from "./blog-detail-data";
+import { Dock, DockIcon } from "@/src/components/ui/dock";
 
 export default function BlogDetailSidebar() {
   return (
@@ -47,9 +48,11 @@ export default function BlogDetailSidebar() {
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2">
           {[Bookmark, Share2, MessageCircle, FileText].map((Icon, index) => (
-            <button key={index} className="grid size-10 place-items-center rounded-full border transition hover:bg-muted" type="button">
-              <Icon className="size-4" />
-            </button>
+            <Dock key={index} className="size-10">
+              <DockIcon>
+                <Icon />
+              </DockIcon>
+            </Dock>  
           ))}
         </CardContent>
       </Card>
