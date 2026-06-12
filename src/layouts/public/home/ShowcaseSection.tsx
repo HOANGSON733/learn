@@ -51,8 +51,8 @@ export default function ShowcaseSection() {
                 </div>
 
                 <div className="relative">
-                    <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-linear-to-r from-muted/90 to-transparent sm:w-24" />
-                    <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-linear-to-l from-muted/90 to-transparent sm:w-24" />
+                    <div className="pointer-events-none absolute inset-y-0 left-0 z-9 w-20 bg-linear-to-r from-muted/90 to-transparent sm:w-24" />
+                    <div className="pointer-events-none absolute inset-y-0 right-0 z-9 w-20 bg-linear-to-l from-muted/90 to-transparent sm:w-24" />
                     <Marquee pauseOnHover className="[--duration:25s] [--gap:0.75rem]">
                         {highlights.map((item) => (
                             <span
