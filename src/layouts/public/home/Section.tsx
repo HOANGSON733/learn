@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { Button } from "@/src/components/ui/button";
 import { InteractiveGridPattern } from "@/src/components/ui/interactive-grid-pattern";
+import Text3DFlip from "@/src/components/ui/text-3d-flip";
+import { Highlighter } from "@/src/components/ui/highlighter";
 
 export default function Section() {
     return (
@@ -17,12 +19,23 @@ export default function Section() {
                 <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-background/70 via-background/30 to-background/70" />
 
                 <div className="relative z-10 flex max-w-7xl flex-col items-center gap-6 px-6 text-center">
-                    <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-7xl lg:leading-tight">
+                    <Text3DFlip
+                        className="font-bold text-3xl sm:text-6xl md:text-[72px]"
+                        rotateDirection="top"
+                        staggerDuration={0.03}
+                        staggerFrom="first"
+                        transition={{ type: "spring", damping: 25, stiffness: 160 }}>
                         The React Framework for the Web
-                    </h1>
+
+                    </Text3DFlip>
                     <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                        Used by some of the world&apos;s largest companies, Next.js enables you to
-                        create high-quality web applications with the power of React components.
+                        Used by some of the world&apos;s largest companies, {" "}
+                        <Highlighter action="underline" color="#FF9800">
+                        Next.js 
+                        </Highlighter>{" "}enables you to
+                        create high-quality web applications with the power of{" "}
+                        <Highlighter action="highlight" color="#87CEFA">
+                         React components.</Highlighter>
                     </p>
                     <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
                         <Button size="lg" className="min-w-30 h-12" asChild>

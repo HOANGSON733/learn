@@ -1,9 +1,10 @@
-import { Bookmark, FileText, MessageCircle, Share2 } from "lucide-react";
+import { Bookmark, FileText, Link, MessageCircle, Share2 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/src/components/ui/card";
 
 import { relatedPosts } from "./blog-detail-data";
 import { Dock, DockIcon } from "@/src/components/ui/dock";
+import { Button } from "@/src/components/ui/button";
 
 export default function BlogDetailSidebar() {
   return (
@@ -18,16 +19,17 @@ export default function BlogDetailSidebar() {
             <li>• Pre-built system ready to use</li>
             <li>• Easy drag-and-drop workflow</li>
           </ul>
-          <div className="space-y-2">
-            <button className="w-full rounded-xl bg-primary px-4 py-2 font-medium text-primary-foreground transition hover:opacity-90">
+          <div className="flex flex-col gap-3">
+            <Button className="w-full rounded-xl h-11 font-medium">
               Get Started
-            </button>
-            <button className="w-full rounded-xl border px-4 py-2 font-medium transition hover:bg-muted">
-              Learn more
-            </button>
+            </Button>
+            <Button variant="outline" className="w-full rounded-xl h-11 font-medium">
+              Learn More
+            </Button>
+
           </div>
         </CardContent>
-      </Card>
+      </Card >
 
       <Card>
         <CardHeader>
@@ -42,18 +44,22 @@ export default function BlogDetailSidebar() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Share</CardTitle>
+      <Card className="w-full max-w-sm gap-0">
+        <CardHeader className="pb-0! pt-0!">
+          <CardTitle>Share</CardTitle>
         </CardHeader>
-        <CardContent className="flex flex-wrap gap-2">
-          {[Bookmark, Share2, MessageCircle, FileText].map((Icon, index) => (
-            <Dock key={index} className="size-10">
-              <DockIcon>
-                <Icon />
+
+        <CardContent className=" pt-0">
+          <Dock className=" mx-auto rounded-2xl border bg-background p-2">
+            {[Bookmark, Share2, MessageCircle, FileText].map((Icon, index) => (
+              <DockIcon
+                key={index}
+                className="rounded-xl hover:bg-accent"
+              >
+                <Icon className="size-5" />
               </DockIcon>
-            </Dock>  
-          ))}
+            ))}
+          </Dock>
         </CardContent>
       </Card>
 
@@ -73,6 +79,6 @@ export default function BlogDetailSidebar() {
           ))}
         </CardContent>
       </Card>
-    </aside>
+    </aside >
   );
 }
