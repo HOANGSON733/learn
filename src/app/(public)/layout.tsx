@@ -5,7 +5,7 @@ import FooterLayout from "@/src/components/layout/footer/FooterLayout";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="cursor-none [&_*]:cursor-none">
+    <div className="flex min-h-screen flex-col cursor-none [&_*]:cursor-none">
       <Pointer />
       <HeaderLayout />
       <PublicShell>{children}</PublicShell>

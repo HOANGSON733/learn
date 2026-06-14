@@ -21,7 +21,7 @@ export default function HeaderLayout() {
                 </Link>
 
                 {/* Menu */}
-                <NavigationMenu>
+                <NavigationMenu viewport={false}>
                     <NavigationMenuList className="gap-2">
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
@@ -30,6 +30,17 @@ export default function HeaderLayout() {
                                     className="px-4 py-2 font-medium hover:text-primary"
                                 >
                                     Home
+                                </Link>
+                            </NavigationMenuLink>
+                        </NavigationMenuItem>
+
+                        <NavigationMenuItem>
+                            <NavigationMenuLink asChild>
+                                <Link
+                                    href="/news-feed"
+                                    className="px-4 py-2 font-medium hover:text-primary"
+                                >
+                                    News Feed
                                 </Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>

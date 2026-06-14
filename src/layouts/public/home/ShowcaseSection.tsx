@@ -1,4 +1,10 @@
-import { Marquee } from "@/src/components/ui/marquee";
+import {
+    Marquee,
+    MarqueeContent,
+    MarqueeFade,
+    MarqueeItem,
+} from "@/src/components/kibo-ui/marquee";
+// import { Marquee } from "@/src/components/ui/marquee";
 import { NumberTicker } from "@/src/components/ui/number-ticker";
 import { ProgressiveBlur } from "@/src/components/ui/progressive-blur";
 
@@ -51,21 +57,40 @@ export default function ShowcaseSection() {
                 </div>
 
                 <div className="relative">
-                    <div className="pointer-events-none absolute inset-y-0 left-0 z-9 w-20 bg-linear-to-r from-muted/90 to-transparent sm:w-24" />
-                    <div className="pointer-events-none absolute inset-y-0 right-0 z-9 w-20 bg-linear-to-l from-muted/90 to-transparent sm:w-24" />
-                    <Marquee pauseOnHover className="[--duration:25s] [--gap:0.75rem]">
-                        {highlights.map((item) => (
-                            <span
-                                key={item}
-                                className="rounded-full border border-border/80 bg-background px-4 py-1.5 text-sm text-muted-foreground"
-                            >
-                                {item}
-                            </span>
-
-                        ))}
-
+                    <Marquee>
+                        <MarqueeContent speed={40}>
+                            {highlights.map((highlight, idx) => (
+                                <MarqueeItem
+                                    key={highlight + idx}
+                                    className="mx-2 flex items-center">
+                                    <span
+                                        className="rounded-full flex items-center justify-center border border-border/80 bg-background px-5 py-5 text-sm text-muted-foreground h-7"
+                                    >
+                                        {highlight}
+                                    </span>
+                                </MarqueeItem>
+                            ))}
+                        </MarqueeContent>
+                        <MarqueeFade side="left" />
+                        <MarqueeFade side="right" />
                     </Marquee>
-
+                    <Marquee className="mt-5">
+                        <MarqueeContent direction="right" speed={40}>
+                            {highlights.map((highlight, idx) => (
+                                <MarqueeItem
+                                    key={highlight + idx}
+                                    className="mx-2 flex items-center">
+                                    <span
+                                        className="rounded-full flex items-center justify-center border border-border/80 bg-background px-5 py-5 text-sm text-muted-foreground h-7"
+                                    >
+                                        {highlight}
+                                    </span>
+                                </MarqueeItem>
+                            ))}
+                        </MarqueeContent>
+                        <MarqueeFade side="right" />
+                        <MarqueeFade side="left" />
+                    </Marquee>
                 </div>
             </div>
         </section>
