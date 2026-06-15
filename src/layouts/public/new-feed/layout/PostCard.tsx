@@ -10,7 +10,7 @@ const reactions = [
 
 export default function PostCard() {
   return (
-    <Card className="mx-auto w-full max-w-[880px] border border-border/70 bg-background p-0 text-zinc-100 shadow-2xl shadow-black/30">
+    <Card className="mx-auto w-full max-w-[680px] border border-border/70 bg-background p-0 text-zinc-100 shadow-2xl shadow-black/30">
       <div className="flex items-start justify-between gap-4 px-4 pt-4">
         <div className="flex items-center gap-3">
           <div className="relative size-10 rounded-full border-2 border-blue-500 p-0.5">
