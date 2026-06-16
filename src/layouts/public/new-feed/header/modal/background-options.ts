@@ -5,8 +5,7 @@ export type BackgroundId =
   | "black"
   | "gradient-red-purple"
   | "gradient-purple-blue"
-  | "gradient-yellow-orange"
-  | "gradient-dark";
+  | "gradient-yellow-orange";
 
 export type BackgroundPreset = {
   id: BackgroundId;
