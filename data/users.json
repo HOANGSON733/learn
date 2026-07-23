@@ -4,7 +4,8 @@
     "fullName": "Lê Thị Kiều Nhi",
     "email": "saigoncodon52@gmail.com",
     "passwordHash": "$2b$10$fBv0KxazEi/k1na3ZE8g5u6LWAy7R6G0rWBlfLYzetn5l8aja.cqm",
-    "createdAt": "2026-07-23T03:08:37.474Z"
+    "createdAt": "2026-07-23T03:08:37.474Z",
+    "image": "/uploads/avatars/d7ff57fa-065d-46c0-83d1-d028e0e5c3ad-1784795609688.webp"
   },
   {
     "id": "0377e8ac-0c1e-4726-91d7-45adb2a59496",
@@ -12,5 +13,20 @@
     "email": "saigoncodon523@gmail.com",
     "passwordHash": "$2b$10$L2.//Hqqeo3231PrZGNUpOpoFfecd0tTvL30J.wil2wQTLxpeHV7G",
     "createdAt": "2026-07-23T04:00:31.411Z"
+  },
+  {
+    "id": "59fe2f3a-c9da-4001-b173-fcc3665cb122",
+    "fullName": "Sơn ",
+    "email": "saigoncodon522@gmail.com",
+    "passwordHash": "$2b$10$j7ByqIUFdYjvGXJxKCmYFOVnEuni4DLBK25a92ZbChrU56Hv2nNq2",
+    "createdAt": "2026-07-23T04:02:59.402Z"
+  },
+  {
+    "id": "0a80cc3a-36be-426f-8b61-8a41535a6ff5",
+    "fullName": "Nguyễn Ngọc Như",
+    "email": "saigoncodon521@gmail.com",
+    "passwordHash": "$2b$10$6pcWq.y8irNomsb5hqXoXuCkK8ydqhPJ5T/61XqYqslxXElHf6Vbi",
+    "createdAt": "2026-07-23T04:47:58.836Z",
+    "image": "/uploads/avatars/0a80cc3a-36be-426f-8b61-8a41535a6ff5-1784794457111.png"
   }
 ]

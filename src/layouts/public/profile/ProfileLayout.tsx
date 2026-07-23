@@ -1,4 +1,5 @@
 "use client"
+import { useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 import { Badge } from "@/src/components/ui/badge";
 import { Button } from "@/src/components/ui/button";
@@ -6,11 +7,14 @@ import { Card, CardContent } from "@/src/components/ui/card";
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
-import { Bell, Key, Lock, User, Shield, Star, LogOut } from "lucide-react";
+import { Bell, Key, Lock, User, Shield, Star, LogOut, Camera, Loader2 } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 
 export default function ProfileLayout() {
-    const { data: session, status } = useSession();
+    const { data: session, status, update } = useSession();
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [isUploading, setIsUploading] = useState(false);
+    const [uploadError, setUploadError] = useState("");
 
     if (status === "loading") {
         return <div className="container mx-auto px-4 py-6">Loading...</div>;
@@ -21,23 +25,93 @@ export default function ProfileLayout() {
         // hoặc redirect: router.push("/login")
     }
 
+    const handleAvatarClick = () => {
+        fileInputRef.current?.click();
+    };
+
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setUploadError("");
+        setIsUploading(true);
+
+        try {
+            const formData = new FormData();
+            formData.append("avatar", file);
+
+            const res = await fetch("/api/profile/avatar", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                setUploadError(data.message ?? "Đổi ảnh đại diện thất bại.");
+                return;
+            }
+
+            // Cập nhật session ngay lập tức, không cần đăng xuất/đăng nhập lại
+            await update({ image: data.image });
+        } catch (err) {
+            console.error(err);
+            setUploadError("Không thể kết nối máy chủ, vui lòng thử lại.");
+        } finally {
+            setIsUploading(false);
+            if (fileInputRef.current) fileInputRef.current.value = "";
+        }
+    };
+
     return (
         <div className="container mx-auto px-4 py-6 md:px-6 2xl:max-w-[1400px]">
             <div className="mx-auto max-w-4xl">
                 {/* Header */}
                 <div className="mb-8 flex items-center gap-6">
-                    <Avatar className="size-20">
-                        <AvatarImage src={session.user?.image ?? ""} alt="User" />
-                        <AvatarFallback>{session.user?.name?.charAt(0).toUpperCase()}</AvatarFallback>
-                    </Avatar>
+                    <div className="relative">
+                        <Avatar className="size-20">
+                            <AvatarImage src={session.user?.image ?? ""} alt="User" />
+                            <AvatarFallback>{session.user?.name?.charAt(0).toUpperCase()}</AvatarFallback>
+                        </Avatar>
+
+                        <button
+                            type="button"
+                            onClick={handleAvatarClick}
+                            disabled={isUploading}
+                            className="absolute -bottom-1 -right-1 flex size-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50 disabled:opacity-60 dark:border-slate-700 dark:bg-zinc-900 dark:text-slate-300"
+                            aria-label="Đổi ảnh đại diện"
+                        >
+                            {isUploading ? (
+                                <Loader2 className="size-3.5 animate-spin" />
+                            ) : (
+                                <Camera className="size-3.5" />
+                            )}
+                        </button>
+
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept="image/png,image/jpeg,image/webp,image/gif"
+                            className="hidden"
+                            onChange={handleFileChange}
+                        />
+                    </div>
+
                     <div>
                         <h1 className="text-2xl font-semibold">{session.user?.name}</h1>
                         <p className="text-muted-foreground text-sm">
                             Manage your account settings and preferences
                         </p>
+                        {uploadError && (
+                            <p className="mt-1 text-sm font-medium text-red-600 dark:text-red-400">
+                                {uploadError}
+                            </p>
+                        )}
                     </div>
+
                     <Button
                         variant="outline"
+                        className="ml-auto"
                         onClick={() => signOut({ callbackUrl: "/login" })}
                     >
                         <LogOut className="mr-2 size-4" />

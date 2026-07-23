@@ -16,6 +16,7 @@ type StoredUser = {
     email: string;
     passwordHash: string;
     createdAt: string;
+    image?: string | null;
 };
 
 async function readUsers(): Promise<StoredUser[]> {
@@ -60,6 +61,7 @@ const { handlers, signIn, signOut, auth } = NextAuth({
                     id: user.id,
                     name: user.fullName,
                     email: user.email,
+                    image: user.image ?? null,
                 };
             },
         }),
@@ -71,16 +73,27 @@ const { handlers, signIn, signOut, auth } = NextAuth({
         signIn: "/login",
     },
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, user, trigger, session }) {
             if (user) {
                 token.id = user.id;
+                token.picture = user.image;
             }
+
+            // Cho phép client gọi useSession().update({ image: "..." })
+            // để cập nhật session ngay mà không cần đăng nhập lại
+            if (trigger === "update" && session?.image !== undefined) {
+                token.picture = session.image;
+            }
+
             return token;
         },
         async session({ session, token }) {
             if (session.user && token.id) {
                 (session.user as typeof session.user & { id: string }).id =
                     token.id as string;
+            }
+            if (session.user && token.picture !== undefined) {
+                session.user.image = token.picture as string | null;
             }
             return session;
         },

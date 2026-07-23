@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import Image from "next/image";
+import { useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "motion/react";
 import {
     ChevronDown,
@@ -13,6 +13,7 @@ import {
     Video,
 } from "lucide-react";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 import { Button } from "@/src/components/ui/button";
 import { Card } from "@/src/components/ui/card";
 import {
@@ -86,15 +87,16 @@ const addPostActions = [
 const emojiCategories = ["Mặt cười", "Biểu cảm", "Người", "Động vật", "Thức ăn", "Du lịch"];
 
 const emojiGrid = [
-    "😀","😃","😄","😁","😆","😅","🤣","😂",
-    "🙂","🙃","😉","😊","😇","😍","😘","😗",
-    "😙","😚","😋","😛","😝","😜","🤪","🤨",
-    "🧐","🤓","😎","🥳","😏","😒","😞","😔",
+    "😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂",
+    "🙂", "🙃", "😉", "😊", "😇", "😍", "😘", "😗",
+    "😙", "😚", "😋", "😛", "😝", "😜", "🤪", "🤨",
+    "🧐", "🤓", "😎", "🥳", "😏", "😒", "😞", "😔",
 ];
 
 type ThinkingModalProps = {
     trigger: ReactNode;
-    avatarUrl: string;
+    // Không bắt buộc nữa — nếu không truyền, modal sẽ tự lấy từ session đăng nhập
+    avatarUrl?: string;
     userName?: string;
 };
 
@@ -111,8 +113,14 @@ function getAudienceIcon(id: AudienceId) {
 export default function ThinkingModal({
     trigger,
     avatarUrl,
-    userName = "Tuyền Ngọc",
+    userName,
 }: ThinkingModalProps) {
+    const { data: session } = useSession();
+
+    // Ưu tiên props được truyền vào, nếu không có thì lấy từ session đang đăng nhập
+    const resolvedAvatarUrl = avatarUrl ?? session?.user?.image ?? "";
+    const resolvedUserName = userName ?? session?.user?.name ?? "Bạn";
+
     const [content, setContent] = useState("");
     const [step, setStep] = useState<ModalStep>("compose");
     const [audience, setAudience] = useState<AudienceId>("public");
@@ -175,15 +183,14 @@ export default function ThinkingModal({
                                 <Separator />
 
                                 <div className="flex items-center gap-3 px-4 py-3">
-                                    <Image
-                                        src={avatarUrl}
-                                        alt={userName}
-                                        width={40}
-                                        height={40}
-                                        className="block size-10 shrink-0 rounded-full object-cover"
-                                    />
+                                    <Avatar className="size-10 shrink-0">
+                                        <AvatarImage src={resolvedAvatarUrl} alt={resolvedUserName} />
+                                        <AvatarFallback>
+                                            {resolvedUserName.charAt(0).toUpperCase()}
+                                        </AvatarFallback>
+                                    </Avatar>
                                     <div>
-                                        <p className="font-semibold leading-tight">{userName}</p>
+                                        <p className="font-semibold leading-tight">{resolvedUserName}</p>
                                         <Button
                                             type="button"
                                             variant="secondary"
@@ -239,7 +246,7 @@ export default function ThinkingModal({
                                                     value={content}
                                                     onChange={(event) => setContent(event.target.value)}
                                                     onClick={(event) => event.stopPropagation()}
-                                                    placeholder="Ngọc ơi, bạn đang nghĩ gì thế?"
+                                                    placeholder={`${resolvedUserName} ơi, bạn đang nghĩ gì thế?`}
                                                     className={cn(
                                                         "w-full resize-none border-0 bg-transparent shadow-none outline-none",
                                                         "focus-visible:ring-0",
