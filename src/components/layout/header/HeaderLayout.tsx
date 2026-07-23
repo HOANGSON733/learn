@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 
 import {
@@ -11,9 +12,11 @@ import {
 import { AnimatedThemeToggler } from "@/src/components/ui/animated-theme-toggler";
 import Image from "next/image";
 import logo from "@/src/assets/logo.png";
+import ProfileLayout from "@/src/layouts/public/profile/ProfileLayout";
+import HeaderAuth from "@/src/layouts/public/profile/HeaderAuth";
 export default function HeaderLayout() {
     return (
-        <header className="fixed top-0 left-0 right-0 z-10 border-b bg-background/95 backdrop-blur">
+        <header className="fixed top-0 left-0 right-0 z-20 border-b bg-background/95 backdrop-blur">
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 {/* Logo */}
                 <Link href="/">
@@ -115,12 +118,7 @@ export default function HeaderLayout() {
                 <div className="flex items-center gap-2">
                     <AnimatedThemeToggler />
                     {/* Login */}
-                    <Link
-                        href="/login"
-                        className="rounded-md bg-primary px-4 py-2 text-primary-foreground hover:opacity-90"
-                    >
-                        Login
-                    </Link>
+                    <HeaderAuth />
                 </div>
             </div>
         </header>

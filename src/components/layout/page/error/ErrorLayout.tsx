@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import { InteractiveHoverButton } from "@/src/components/ui/interactive-hover-button";
 
 export default function ErrorLayout() {
   const router = useRouter();
