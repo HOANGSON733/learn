@@ -31,6 +31,7 @@ export const posts = [
             comments: 43,
             shares: 37,
         },
+        createdAt: new Date().toISOString(),
     },
     {
         id: 2,
