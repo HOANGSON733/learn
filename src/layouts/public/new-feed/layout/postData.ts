@@ -13,7 +13,27 @@ export const reactions = [
     },
 ];
 
-export const posts = [
+export type Post = {
+    id: number;
+    author: {
+        name: string;
+        avatar: string;
+        isFollowing: boolean;
+        time?: string;
+    };
+    content: string;
+    media: string;
+    stats: {
+        reactions: string;
+        comments: number;
+        shares: number;
+    };
+    createdAt: string;
+};
+
+const now = Date.now();
+
+export const posts: Post[] = [
     {
         id: 1,
         author: {
@@ -21,7 +41,6 @@ export const posts = [
             avatar:
                 "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
             isFollowing: true,
-            time: "Hôm qua lúc 22:31",
         },
         content: "❄️ Một ngày tuyệt vời để bắt đầu điều mới mẻ.",
         media:
@@ -31,7 +50,7 @@ export const posts = [
             comments: 43,
             shares: 37,
         },
-        createdAt: new Date().toISOString(),
+        createdAt: new Date(now - 30 * 60 * 1000).toISOString(),
     },
     {
         id: 2,
@@ -40,7 +59,6 @@ export const posts = [
             avatar:
                 "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80",
             isFollowing: false,
-            time: "2 giờ trước",
         },
         content: "☕ Sáng nay cà phê ngon hơn mọi ngày.",
         media:
@@ -50,6 +68,7 @@ export const posts = [
             comments: 12,
             shares: 8,
         },
+        createdAt: new Date(now - 2 * 60 * 60 * 1000).toISOString(),
     },
     {
         id: 3,
@@ -58,7 +77,6 @@ export const posts = [
             avatar:
                 "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
             isFollowing: true,
-            time: "4 giờ trước",
         },
         content: "🌊 Biển hôm nay đẹp quá!",
         media:
@@ -68,6 +86,7 @@ export const posts = [
             comments: 67,
             shares: 24,
         },
+        createdAt: new Date(now - 4 * 60 * 60 * 1000).toISOString(),
     },
     {
         id: 4,
@@ -76,7 +95,6 @@ export const posts = [
             avatar:
                 "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
             isFollowing: false,
-            time: "6 giờ trước",
         },
         content: "🚗 Chuyến roadtrip cuối tuần cực chill.",
         media:
@@ -86,6 +104,7 @@ export const posts = [
             comments: 21,
             shares: 15,
         },
+        createdAt: new Date(now - 6 * 60 * 60 * 1000).toISOString(),
     },
     {
         id: 5,
@@ -94,7 +113,6 @@ export const posts = [
             avatar:
                 "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=200&q=80",
             isFollowing: true,
-            time: "8 giờ trước",
         },
         content: "🌸 Mùa hoa nở đẹp quá.",
         media:
@@ -104,6 +122,7 @@ export const posts = [
             comments: 34,
             shares: 19,
         },
+        createdAt: new Date(now - 8 * 60 * 60 * 1000).toISOString(),
     },
     {
         id: 6,
@@ -112,7 +131,6 @@ export const posts = [
             avatar:
                 "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80",
             isFollowing: false,
-            time: "10 giờ trước",
         },
         content: "💻 Hoàn thành dự án sau 2 tuần cày cuốc.",
         media:
@@ -122,6 +140,7 @@ export const posts = [
             comments: 52,
             shares: 13,
         },
+        createdAt: new Date(now - 10 * 60 * 60 * 1000).toISOString(),
     },
     {
         id: 7,
@@ -130,7 +149,6 @@ export const posts = [
             avatar:
                 "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80",
             isFollowing: true,
-            time: "12 giờ trước",
         },
         content: "🍜 Tô mì này đáng giá 10/10.",
         media:
@@ -140,6 +158,7 @@ export const posts = [
             comments: 16,
             shares: 4,
         },
+        createdAt: new Date(now - 12 * 60 * 60 * 1000).toISOString(),
     },
     {
         id: 8,
@@ -148,7 +167,6 @@ export const posts = [
             avatar:
                 "https://images.unsplash.com/photo-1504257432389-52343af06ae3?auto=format&fit=crop&w=200&q=80",
             isFollowing: false,
-            time: "14 giờ trước",
         },
         content: "🏋️ Hoàn thành mục tiêu tập luyện tháng này.",
         media:
@@ -158,6 +176,7 @@ export const posts = [
             comments: 28,
             shares: 11,
         },
+        createdAt: new Date(now - 14 * 60 * 60 * 1000).toISOString(),
     },
     {
         id: 9,
@@ -166,7 +185,6 @@ export const posts = [
             avatar:
                 "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=200&q=80",
             isFollowing: true,
-            time: "16 giờ trước",
         },
         content: "📸 Bộ ảnh mới vừa chụp xong.",
         media:
@@ -176,6 +194,7 @@ export const posts = [
             comments: 95,
             shares: 42,
         },
+        createdAt: new Date(now - 16 * 60 * 60 * 1000).toISOString(),
     },
     {
         id: 10,
@@ -184,7 +203,6 @@ export const posts = [
             avatar:
                 "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=200&q=80",
             isFollowing: false,
-            time: "18 giờ trước",
         },
         content: "🌄 Bình minh trên núi thật sự đáng giá.",
         media:
@@ -194,6 +212,7 @@ export const posts = [
             comments: 48,
             shares: 26,
         },
+        createdAt: new Date(now - 18 * 60 * 60 * 1000).toISOString(),
     },
     {
         id: 11,
@@ -202,7 +221,6 @@ export const posts = [
             avatar:
                 "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=200&q=80",
             isFollowing: true,
-            time: "20 giờ trước",
         },
         content: "🎵 Một buổi tối nhẹ nhàng cùng âm nhạc.",
         media:
@@ -212,6 +230,6 @@ export const posts = [
             comments: 31,
             shares: 17,
         },
+        createdAt: new Date(now - 20 * 60 * 60 * 1000).toISOString(),
     },
 ];
-export type Post = (typeof posts)[number];

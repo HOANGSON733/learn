@@ -10,6 +10,14 @@ import bcrypt from "bcryptjs";
 
 const USERS_FILE = path.join(process.cwd(), "data", "users.json");
 
+const googleProvider =
+    process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+        ? GoogleProvider({
+              clientId: process.env.GOOGLE_CLIENT_ID,
+              clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+          })
+        : null;
+
 type StoredUser = {
     id: string;
     fullName: string;
@@ -30,11 +38,9 @@ async function readUsers(): Promise<StoredUser[]> {
 }
 
 const { handlers, signIn, signOut, auth } = NextAuth({
+    secret: process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET,
     providers: [
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-        }),
+        ...(googleProvider ? [googleProvider] : []),
         CredentialsProvider({
             name: "Credentials",
             credentials: {

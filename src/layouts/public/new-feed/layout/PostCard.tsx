@@ -1,6 +1,7 @@
 import { Heart, MessageCircle, MoreHorizontal, Share2, ThumbsUp, X } from "lucide-react";
 import { Card } from "@/src/components/ui/card";
 import { Post } from "./postData";
+import { formatRelativeTime } from "./time";
 
 interface PostCardProps {
   post: Post;
@@ -19,7 +20,7 @@ export default function PostCard({ post }: PostCardProps) {
             />
           </div>
 
-          <div className="leading-tight">
+          <div className="leadi ng-tight">
             <div className="flex items-center gap-2">
               <p className="font-semibold text-foreground">
                 {post.author.name}
@@ -31,7 +32,7 @@ export default function PostCard({ post }: PostCardProps) {
             </div>
 
             <div className="mt-1 flex items-center gap-2 text-sm text-zinc-400">
-              <span>{post.author.time}</span>
+              <span>{post.author.time ?? formatRelativeTime(post.createdAt)}</span>
               <span>·</span>
               <span>🌐</span>
             </div>
