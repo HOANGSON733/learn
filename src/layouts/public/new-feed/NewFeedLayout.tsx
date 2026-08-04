@@ -67,7 +67,6 @@ function createAutoPost(): Post {
       name: randomAuthor.name,
       avatar: randomAuthor.avatar,
       isFollowing: false,
-      time: "Vừa xong",
     },
 
     content: randomContent,
@@ -79,6 +78,8 @@ function createAutoPost(): Post {
       comments: 0,
       shares: 0,
     },
+
+    createdAt: new Date().toISOString(),
   };
 }
 
@@ -169,7 +170,7 @@ export default function NewFeedLayout() {
 
   return (
     <div className="flex w-full flex-col items-center gap-4 px-4 py-6">
-      <HeaderLayout />
+      <HeaderLayout /> 
 
       {posts.map((post) => (
         <PostCard

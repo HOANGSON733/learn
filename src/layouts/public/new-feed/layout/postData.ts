@@ -12,28 +12,8 @@ export const reactions = [
         label: "Love",
     },
 ];
-export interface Post {
-    id: number;
 
-    author: {
-        name: string;
-        avatar: string;
-        isFollowing: boolean;
-    };
-
-    content: string;
-
-    media: string;
-
-    stats: {
-        reactions: string;
-        comments: number;
-        shares: number;
-    };
-
-    createdAt: number;
-}
-export const posts: Post[] = [
+export const posts = [
     {
         id: 1,
 
@@ -55,8 +35,7 @@ export const posts: Post[] = [
             comments: 43,
             shares: 37,
         },
-
-        createdAt: Date.now() - 24 * 60 * 60 * 1000,
+        createdAt: new Date().toISOString(),
     },
     {
         id: 2,
@@ -74,7 +53,6 @@ export const posts: Post[] = [
             comments: 12,
             shares: 8,
         },
-        createdAt: Date.now() - 24 * 60 * 60 * 1000,
     },
     {
         id: 3,
@@ -92,7 +70,6 @@ export const posts: Post[] = [
             comments: 67,
             shares: 24,
         },
-        createdAt: Date.now() - 24 * 60 * 60 * 1000,
     },
     {
         id: 4,
@@ -110,7 +87,6 @@ export const posts: Post[] = [
             comments: 21,
             shares: 15,
         },
-        createdAt: Date.now() - 24 * 60 * 60 * 1000,
     },
     {
         id: 5,
@@ -128,7 +104,6 @@ export const posts: Post[] = [
             comments: 34,
             shares: 19,
         },
-        createdAt: Date.now() - 24 * 60 * 60 * 1000,
     },
     {
         id: 6,
@@ -146,7 +121,6 @@ export const posts: Post[] = [
             comments: 52,
             shares: 13,
         },
-        createdAt: Date.now() - 24 * 60 * 60 * 1000,
     },
     {
         id: 7,
@@ -164,7 +138,6 @@ export const posts: Post[] = [
             comments: 16,
             shares: 4,
         },
-        createdAt: Date.now() - 24 * 60 * 60 * 1000,
     },
     {
         id: 8,
@@ -173,7 +146,7 @@ export const posts: Post[] = [
             avatar:
                 "https://images.unsplash.com/photo-1504257432389-52343af06ae3?auto=format&fit=crop&w=200&q=80",
             isFollowing: false,
-
+            time: "14 giờ trước",
         },
         content: "🏋️ Hoàn thành mục tiêu tập luyện tháng này.",
         media:
@@ -183,7 +156,6 @@ export const posts: Post[] = [
             comments: 28,
             shares: 11,
         },
-        createdAt: Date.now() - 24 * 60 * 60 * 1000,
     },
     {
         id: 9,
@@ -192,7 +164,7 @@ export const posts: Post[] = [
             avatar:
                 "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=200&q=80",
             isFollowing: true,
-
+            time: "16 giờ trước",
         },
         content: "📸 Bộ ảnh mới vừa chụp xong.",
         media:
@@ -202,7 +174,6 @@ export const posts: Post[] = [
             comments: 95,
             shares: 42,
         },
-        createdAt: Date.now() - 24 * 60 * 60 * 1000,
     },
     {
         id: 10,
@@ -211,7 +182,7 @@ export const posts: Post[] = [
             avatar:
                 "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=200&q=80",
             isFollowing: false,
-
+            time: "18 giờ trước",
         },
         content: "🌄 Bình minh trên núi thật sự đáng giá.",
         media:
@@ -221,7 +192,6 @@ export const posts: Post[] = [
             comments: 48,
             shares: 26,
         },
-        createdAt: Date.now() - 24 * 60 * 60 * 1000,
     },
     {
         id: 11,
@@ -230,7 +200,7 @@ export const posts: Post[] = [
             avatar:
                 "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=200&q=80",
             isFollowing: true,
-
+            time: "20 giờ trước",
         },
         content: "🎵 Một buổi tối nhẹ nhàng cùng âm nhạc.",
         media:
@@ -240,7 +210,5 @@ export const posts: Post[] = [
             comments: 31,
             shares: 17,
         },
-        createdAt: Date.now() - 24 * 60 * 60 * 1000,
     },
 ];
-export type Post = (typeof posts)[number];
