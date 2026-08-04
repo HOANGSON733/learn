@@ -1,12 +1,26 @@
 import { Heart, MessageCircle, MoreHorizontal, Share2, ThumbsUp, X } from "lucide-react";
 import { Card } from "@/src/components/ui/card";
 import { Post } from "./postData";
+"use client";
 
+import { useEffect, useState } from "react";
+import { formatRelativeTime } from "@/src/utils/format-relative-time";
 interface PostCardProps {
   post: Post;
 }
 
 export default function PostCard({ post }: PostCardProps) {
+  const [, setCurrentTime] = useState(Date.now());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(Date.now());
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
   return (
     <Card className="mx-auto w-full max-w-[680px] border border-border/70 bg-background p-0 text-zinc-100 shadow-2xl shadow-black/30">
       <div className="flex items-start justify-between gap-4 px-4 pt-4">
@@ -31,7 +45,9 @@ export default function PostCard({ post }: PostCardProps) {
             </div>
 
             <div className="mt-1 flex items-center gap-2 text-sm text-zinc-400">
-              <span>{post.author.time}</span>
+              <span>
+                {formatRelativeTime(post.createdAt)}
+              </span>
               <span>·</span>
               <span>🌐</span>
             </div>
